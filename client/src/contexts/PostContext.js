@@ -99,7 +99,7 @@ export default function PostProvider({ children }) {
     <PostContext.Provider
       value={{
         post: post,
-        rootComments: commentsByParentId[null],
+        rootComments: commentsByParentId[null], // null means no parent
         getReplies,
         createLocalComment,
         updateLocalComment,

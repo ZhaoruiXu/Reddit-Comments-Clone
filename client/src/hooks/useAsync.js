@@ -30,6 +30,7 @@ export const useAsyncInternal = (
   const [error, setError] = useState();
   const [value, setValue] = useState();
 
+  // use useCallBack as this function handles network requests and we dont want to re-render them when nothing related is changed
   const execute = useCallback((...params) => {
     setLoading(true);
     return func(...params) // the params are from the passed in func
@@ -44,6 +45,7 @@ export const useAsyncInternal = (
         return Promise.reject(error);
       })
       .finally(() => {
+        // will execute no matter what
         setLoading(false);
       });
   }, dependencies);
