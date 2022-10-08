@@ -14,7 +14,11 @@ app.register(sensible);
 app.register(cookie, { secret: process.env.COOKIE_SECRET });
 // cross origin resource sharing between the client and server URL
 app.register(cors, {
-  origin: process.env.CLIENT_URL,
+  // origin: process.env.CLIENT_URL,
+  origin:
+    process.env.NODE_ENV !== "production"
+      ? process.env.DEV_CLIENT_URL
+      : process.env.LIVE_CLIENT_URL,
   credentials: true, // for Cookies
 });
 // middleware
