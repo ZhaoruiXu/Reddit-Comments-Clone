@@ -16,7 +16,7 @@ export default function PostProvider({ children }) {
   const { id } = useParams();
 
   // server side states
-  const { loading, error, value: post } = useAsync(() => getPost(id), [id]);
+  const { loading, error, value: post } = useAsync(() => getPost(id), [id]); // only when post id is changed or mount/unmount will trigger this call
 
   console.log("current post", post);
   // store comments from server to local states

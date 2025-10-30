@@ -47,9 +47,9 @@ const Comment = ({ id, message, user, createdAt, likeCount, isLikedByMe }) => {
 
   const onCommentReply = message => {
     return createCommentFn
-      .execute({ postId: post.id, message, parentId: id })
+      .execute({ postId: post.id, message, parentId: id }) // talk to the database
       .then(comment => {
-        // if success
+        // after talking the database and if success, the db will turn a Promise with the newly created commented
         setIsReplying(false);
         createLocalComment(comment);
       });

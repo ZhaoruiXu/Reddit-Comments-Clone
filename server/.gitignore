@@ -1,3 +1,6 @@
 node_modules
 # Keep environment variables out of version control
 .env
+# Local SQLite database for development
+*.db
+*.db-journal

@@ -1,6 +1,6 @@
 // Server State Handler
 
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 
 // run code automatically
 export const useAsync = (func, dependencies = []) => {
@@ -30,10 +30,22 @@ export const useAsyncInternal = (
   const [error, setError] = useState();
   const [value, setValue] = useState();
 
+  // Store the latest function in a ref so we don't need to include it in dependencies
+  const funcRef = useRef(func);
+
+  // Update the ref whenever func changes
+  useEffect(() => {
+    funcRef.current = func;
+  }, [func]);
+
   // use useCallBack as this function handles network requests and we dont want to re-render them when nothing related is changed
+  // Note: dependencies is a parameter passed to this hook, so it's dynamic by design
+  // This is a valid pattern for reusable hooks - ESLint can't verify dynamic dependencies
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const execute = useCallback((...params) => {
     setLoading(true);
-    return func(...params) // the params are from the passed in func
+    return funcRef
+      .current(...params) // use the ref to get the latest func
       .then(data => {
         setValue(data);
         setError(undefined);
