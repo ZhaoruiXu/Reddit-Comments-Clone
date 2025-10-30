@@ -26,7 +26,12 @@ app.addHook("onRequest", (req, res, done) => {
   if (req.cookies.userId !== CURRENT_USER_ID) {
     req.cookies.userId = CURRENT_USER_ID;
     res.clearCookie("userId");
-    res.setCookie("userId", CURRENT_USER_ID);
+    res.setCookie("userId", CURRENT_USER_ID, {
+      path: "/",
+      sameSite: "none",
+      secure: true,
+      httpOnly: false,
+    });
   }
   done();
 });
