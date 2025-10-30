@@ -235,4 +235,4 @@ app.post("/posts/:postId/comments/:commentId/toggleLike", async (req, res) => {
   }
 });
 
-app.listen({ port: process.env.PORT });
+app.listen({ port: process.env.PORT, host: "0.0.0.0" });
