@@ -2,6 +2,14 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 async function seed() {
+  // Check if data already exists
+  const userCount = await prisma.user.count();
+  if (userCount > 0) {
+    console.log("Database already seeded, skipping...");
+    return;
+  }
+
+  console.log("Seeding database...");
   await prisma.post.deleteMany();
   await prisma.user.deleteMany();
   const kyle = await prisma.user.create({ data: { name: "Kyle" } });
