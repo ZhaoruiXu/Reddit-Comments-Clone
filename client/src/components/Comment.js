@@ -36,6 +36,7 @@ const Comment = ({ id, message, user, createdAt, likeCount, isLikedByMe }) => {
     updateLocalComment,
     deleteLocalComment,
     toggleLocalCommentLike,
+    currentUserId,
   } = usePost();
 
   const createCommentFn = useAsyncFn(createComment);
@@ -124,7 +125,7 @@ const Comment = ({ id, message, user, createdAt, likeCount, isLikedByMe }) => {
             Icon={FaReply}
             aria-label={isReplying ? "Cancle Reply" : "Reply"}
           />
-          {currentUser.id === user.id && (
+          {currentUserId === user.id && (
             <>
               <IconBtn
                 onClick={() => setIsEditing(prev => !prev)}

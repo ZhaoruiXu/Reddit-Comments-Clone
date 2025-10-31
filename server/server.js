@@ -110,6 +110,7 @@ app.get("/posts/:id", async (req, res) => {
 
         return {
           ...post,
+          currentUserId: req.cookies.userId, // Add current user ID to response
           comments: post.comments.map(comment => {
             const { _count, ...commentFields } = comment;
             return {

@@ -105,6 +105,7 @@ export default function PostProvider({ children }) {
         updateLocalComment,
         deleteLocalComment,
         toggleLocalCommentLike,
+        currentUserId: post?.currentUserId, // Add currentUserId from API
       }}>
       {loading ? (
         <h1>Loading...</h1>
